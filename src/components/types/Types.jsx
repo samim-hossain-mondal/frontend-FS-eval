@@ -1,31 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import proptypes from 'prop-types';
 import Modal from '../modal/Modal';
 import Field from '../field/Field';
-import {API_URL} from '../../constants/url';
 import './Types.css';
-import axios from 'axios';
 
-export default function Types({types}) {
-  const [selectedType, setSelectedType] = useState({});
-  const [show, setShow] = useState(false);
-  const [newType, setNewType] = useState({});
-  const clickHandler = (type) => {
-    setSelectedType(type);
-  };
-  const onChange = (e) => {
-    setNewType(e.target.value);
-  };
-  const onSave = async() => {
-    await axios.post(API_URL + '/contents', {
-      name: newType
-    }, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      }
-    });
-    setShow(false);
-  };
+export default function Types({types, onSave, onChange, clickHandler, selectedType, setShow, show}) {
+
   console.log(selectedType);
   return (
     <div className='content-type-body'>
@@ -60,5 +40,11 @@ export default function Types({types}) {
 }
 
 Types.propTypes = {
-  types: proptypes.array.isRequired
+  types: proptypes.array.isRequired,
+  onSave: proptypes.func.isRequired,
+  onChange: proptypes.func.isRequired,
+  clickHandler: proptypes.func.isRequired,
+  selectedType: proptypes.object.isRequired,
+  setShow: proptypes.func.isRequired,
+  show: proptypes.bool.isRequired
 };

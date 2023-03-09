@@ -6,6 +6,9 @@ import { API_URL } from '../../constants/url';
 
 export default function Dashboard() {
   const [types, setTypes] = useState([]);
+  const [selectedType, setSelectedType] = useState({});
+  const [show, setShow] = useState(false);
+  const [newType, setNewType] = useState({});
   const fetchTypes = async () => {
     const response = await axios.get(`${API_URL}/contents`, {
       headers: {
@@ -16,8 +19,25 @@ export default function Dashboard() {
   };
   useEffect(() => {
     fetchTypes();
-  }, []);
-  console.log(types);
+    console.log('1');
+  }, [newType]);
+  const clickHandler = (type) => {
+    setSelectedType(type);
+  };
+  const onChange = (e) => {
+    setNewType(e.target.value);
+  };
+  const onSave = async() => {
+    await axios.post(API_URL + '/contents', {
+      name: newType
+    }, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+    setShow(false);
+    setNewType({});
+  };
   return (
     <div className="dashboard-page">
       <div className="container-left">
@@ -39,7 +59,7 @@ export default function Dashboard() {
         </div>
       </div>
       <div className="container-right">
-        <ContentType types={types}/>
+        <ContentType types={types} onSave={onSave} onChange={onChange} clickHandler={clickHandler} selectedType={selectedType} setShow={setShow} show={show}/>
       </div>
     </div>
   );

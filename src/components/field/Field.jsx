@@ -1,7 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
+import Modal from '../modal/Modal';
 import proptypes from 'prop-types';
+import axios from 'axios';
+import { API_URL } from '../../constants/url';  
 
 export default function Field({ type }) {
+  const [field, setField] = useState('');
+  const [show, setShow] = useState(false);
+  const onChange = (e) => {
+    setField(e.target.value);
+  };
+  const onSave = async () => {
+    await axios.post(`${API_URL}/contents/${type.name}`, {
+      field: field
+    }, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+    setShow(false);
+    setField('');
+  };
+
   return (
     <div className="right">
       <div className='right-header'>
@@ -13,7 +33,15 @@ export default function Field({ type }) {
       </div>
       <div className='right-body'>
         <div className='add-new-type-btn'>
-          <button>Add another field</button>
+          <button onClick={() => setShow(true)}>Add another field</button>
+          <Modal title="My Modal" onClose={() => setShow(false)} show={show}
+            onSave={onSave}
+          >
+            <div className='create-content'>
+              <label>Add another field</label>
+              <input type="text" onChange={onChange}/>
+            </div>
+          </Modal>
         </div>
         <div className='fields'>
           { type.field.map((field, index) => (
@@ -24,7 +52,8 @@ export default function Field({ type }) {
                 </div>
                 <div className='field-header-2'>
                   <a2>
-                    {field[index]}
+                    {field}
+                    {console.log(field[index])}
                   </a2>
                 </div>
               </div>

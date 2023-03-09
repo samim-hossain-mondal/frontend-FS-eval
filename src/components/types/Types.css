@@ -39,7 +39,7 @@
 .right {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 64%;
   background-color: rgb(229, 227, 255);
   padding: 1rem 1rem;
 }
