@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageNotFound should render successfully 1`] = `
+<div>
+  <div
+    class="page-not-found-text"
+  >
+    <h3>
+      Page not found!
+    </h3>
+  </div>
+</div>
+`;
