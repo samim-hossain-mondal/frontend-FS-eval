@@ -1,16 +1,59 @@
 .dashboard-page {
   display: flex;
   flex-direction: row;
-  height: 100%;
+  height: 100vh;
   width: 100%;
 }
 
 .container-left {
   display: flex;
   flex-direction: column;
-  background-color: ;
+  background-color: rgb(32, 32, 32);
+  color: white;
   width: 25%;
   height: 100%;
+}
+
+.container-left-header {
+  background-color: rgb(78, 78, 255);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 1rem;
+  height: 7%;
+}
+
+.container-left-content {
+  padding: 0 1rem;
+  font-size: large;
+}
+
+.container-left-content > h3 {
+  font-size: 1.3rem;
+}
+
+.container-left-content > ul {
+  padding-top: 5px;
+  padding-left: 15px;
+}
+
+.container-left-content > ul > li {
+  padding: 10px 0;
+  color: rgb(166, 166, 166);
+}
+
+.content-type-builder {
+  display: flex;
+  background-color: rgb(32, 32, 32);
+  padding: 0 1rem;
+  cursor: pointer;
+}
+
+.content-type-builder > h3 {
+  color: white;
+  font-size: 1.3rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .container-right {
