@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import Modal from '../modal/Modal';
+import trashimg from '../../assets/trash-delete-recycle-bin-bucket-waste.png';
+import editimg from '../../assets/user-edit-text-message-note.png';
 import proptypes from 'prop-types';
 
 export default function EditDelete({ field, onEdit, onDelete, onChangeEdit}) {
@@ -7,7 +9,7 @@ export default function EditDelete({ field, onEdit, onDelete, onChangeEdit}) {
   return (
     <div className='option'>
       <div className='edit'>
-        <button onClick={() => setShowEdit(true)}>edit</button>
+        <img src={editimg} onClick={() => setShowEdit(true)} />
         <Modal title="My Modal" onClose={() => setShowEdit(false)} show={showEdit}
           onSave={() => onEdit(field, setShowEdit)}>
           <div className='create-content'>
@@ -17,7 +19,7 @@ export default function EditDelete({ field, onEdit, onDelete, onChangeEdit}) {
         </Modal>
       </div>
       <div className='delete'>
-        <button onClick={() => onDelete(field)}>delete</button>
+        <img src={trashimg} onClick={() => onDelete(field)} />
       </div>
     </div>
   );
