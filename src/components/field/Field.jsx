@@ -2,14 +2,19 @@ import React, {useState, useEffect} from 'react';
 import Modal from '../modal/Modal';
 import proptypes from 'prop-types';
 import axios from 'axios';
+import EditDelete from '../editDelete/EditDelete';
 import { API_URL } from '../../constants/url';  
 
 export default function Field({ type }) {
   const [currentFields, setCurrentFields] = useState(type.field);
   const [field, setField] = useState('');
+  const [editField, setEditField] = useState('');
   const [show, setShow] = useState(false);
   const onChange = (e) => {
     setField(e.target.value);
+  };
+  const onChangeEdit = (e) => {
+    setEditField(e.target.value);
   };
   const fetchFields = async () => {
     const response = await axios.get(`${API_URL}/contents/${type.name}`, {
@@ -41,6 +46,18 @@ export default function Field({ type }) {
     });
     fetchFields();
   };
+  const onEdit = async (fieldname, setShowEdit) => {
+    await axios.patch(`${API_URL}/contents/${type.name}/${fieldname}`, {
+      field: editField
+    }, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+    setShowEdit(false);
+    setEditField('');
+    fetchFields();
+  };
   return (
     <div className="right">
       <div className='right-header'>
@@ -52,7 +69,7 @@ export default function Field({ type }) {
       <div className='right-body'>
         <div className='add-new-type-btn'>
           <button onClick={() => setShow(true)}>Add another field</button>
-          <Modal title="My Modal" onClose={() => setShow(false)} show={show}
+          <Modal title="Modal" onClose={() => setShow(false)} show={show}
             onSave={onSave}
           >
             <div className='create-content'>
@@ -77,14 +94,7 @@ export default function Field({ type }) {
               <div className='field-body'>
                 <a>Text</a>
               </div>
-              <div className='option'>
-                <div className='edit'>
-                  <button>edit</button>
-                </div>
-                <div className='delete'>
-                  <button onClick={() => onDelete(field)}>delete</button>
-                </div>
-              </div>
+              <EditDelete field={field} onEdit={onEdit} onDelete={onDelete} onChangeEdit={onChangeEdit}/>
             </div>
           ))}
         </div>
