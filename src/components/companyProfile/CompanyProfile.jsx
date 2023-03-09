@@ -7,8 +7,8 @@ export default function CompanyProfile() {
       <div className='company-profile-header'>
         <h2>Content Types</h2>
       </div>
-      <div>
-        <h3>Content</h3>
+      <div className='company-profile-body'>
+       
       </div>
     </div>
   );

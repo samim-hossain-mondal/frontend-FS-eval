@@ -1,8 +1,23 @@
-import React from 'react';
-import CompanyProfile from '../companyProfile/CompanyProfile';
+import React, {useState, useEffect} from 'react';
+import ContentType from '../contentType/ContentType';
 import './Dashboard.css';
+import axios from 'axios';
+import { API_URL } from '../../constants/url';
 
 export default function Dashboard() {
+  const [types, setTypes] = useState([]);
+  const fetchTypes = async () => {
+    const response = await axios.get(`${API_URL}/contents`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+    setTypes(response.data);
+  };
+  useEffect(() => {
+    fetchTypes();
+  }, []);
+  console.log(types);
   return (
     <div className="dashboard-page">
       <div className="container-left">
@@ -12,9 +27,11 @@ export default function Dashboard() {
         <div className='container-left-content'>
           <h3>COLLECTION TYPES</h3>
           <ul>
-            <li>Blog</li>
-            <li>Product</li>
-            <li>Page</li>
+            {
+              types.map(type => (
+                <li key={type.id}>{type.name}</li>
+              ))
+            }
           </ul>
         </div>
         <div className='content-type-builder'>
@@ -22,7 +39,7 @@ export default function Dashboard() {
         </div>
       </div>
       <div className="container-right">
-        <CompanyProfile />
+        <ContentType types={types}/>
       </div>
     </div>
   );
