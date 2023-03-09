@@ -18,11 +18,10 @@ export default function Field({ type }) {
       }
     });
     setCurrentFields(response.data);
-    console.log(response.data);
   };
   useEffect(() => {
     fetchFields();
-  }, [field]);
+  }, [field, type.name]);
   const onSave = async () => {
     await axios.post(`${API_URL}/contents/${type.name}`, {
       field: field
@@ -34,7 +33,6 @@ export default function Field({ type }) {
     setShow(false);
     setField('');
   };
-  console.log(currentFields);
   return (
     <div className="right">
       <div className='right-header'>
