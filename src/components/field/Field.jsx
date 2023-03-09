@@ -33,6 +33,14 @@ export default function Field({ type }) {
     setShow(false);
     setField('');
   };
+  const onDelete = async (fieldname) => {
+    await axios.delete(`${API_URL}/contents/${type.name}/${fieldname}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+    fetchFields();
+  };
   return (
     <div className="right">
       <div className='right-header'>
@@ -74,7 +82,7 @@ export default function Field({ type }) {
                   <button>edit</button>
                 </div>
                 <div className='delete'>
-                  <button>delete</button>
+                  <button onClick={() => onDelete(field)}>delete</button>
                 </div>
               </div>
             </div>
