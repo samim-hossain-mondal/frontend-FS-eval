@@ -1,15 +1,28 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Modal from '../modal/Modal';
 import proptypes from 'prop-types';
 import axios from 'axios';
 import { API_URL } from '../../constants/url';  
 
 export default function Field({ type }) {
+  const [currentFields, setCurrentFields] = useState(type.field);
   const [field, setField] = useState('');
   const [show, setShow] = useState(false);
   const onChange = (e) => {
     setField(e.target.value);
   };
+  const fetchFields = async () => {
+    const response = await axios.get(`${API_URL}/contents/${type.name}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+    setCurrentFields(response.data);
+    console.log(response.data);
+  };
+  useEffect(() => {
+    fetchFields();
+  }, [field]);
   const onSave = async () => {
     await axios.post(`${API_URL}/contents/${type.name}`, {
       field: field
@@ -21,14 +34,13 @@ export default function Field({ type }) {
     setShow(false);
     setField('');
   };
-
+  console.log(currentFields);
   return (
     <div className="right">
       <div className='right-header'>
         <a1>{type.name}</a1>
-        {console.log(type.field)}
         <a2>
-          {type.field.length} {type.field.length > 1 ? 'fields' : 'field'}
+          {currentFields.length} {currentFields.length > 1 ? 'fields' : 'field'}
         </a2>
       </div>
       <div className='right-body'>
@@ -44,7 +56,7 @@ export default function Field({ type }) {
           </Modal>
         </div>
         <div className='fields'>
-          { type.field.map((field, index) => (
+          { currentFields.map((field, index) => (
             <div key={index} className='field'>
               <div className='field-header'>
                 <div className='field-header-1'>
@@ -53,7 +65,6 @@ export default function Field({ type }) {
                 <div className='field-header-2'>
                   <a2>
                     {field}
-                    {console.log(field[index])}
                   </a2>
                 </div>
               </div>

@@ -5,8 +5,6 @@ import Field from '../field/Field';
 import './Types.css';
 
 export default function Types({types, onSave, onChange, clickHandler, selectedType, setShow, show}) {
-
-  console.log(selectedType);
   return (
     <div className='content-type-body'>
       <div className="left">
