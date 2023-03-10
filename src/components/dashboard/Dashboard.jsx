@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import ContentType from '../contentType/ContentType';
+import EntryDetails from '../entryDetails/EntryDetails';
 import './Dashboard.css';
 import axios from 'axios';
 import { API_URL } from '../../constants/url';
@@ -9,6 +10,8 @@ export default function Dashboard() {
   const [selectedType, setSelectedType] = useState({});
   const [show, setShow] = useState(false);
   const [newType, setNewType] = useState({});
+  const [click, setClick] = useState(false);
+  const [collection, setCollection] = useState({});
   const fetchTypes = async () => {
     const response = await axios.get(`${API_URL}/contents`, {
       headers: {
@@ -38,6 +41,10 @@ export default function Dashboard() {
     setShow(false);
     setNewType({});
   };
+  const onClickCollection = (value, type) => {
+    setClick(value);
+    setCollection(type);
+  };
   return (
     <div className="dashboard-page">
       <div className="container-left">
@@ -49,17 +56,22 @@ export default function Dashboard() {
           <ul>
             {
               types.map(type => (
-                <li key={type.id}>{type.name}</li>
+                <li key={type.id} onClick={() => onClickCollection(true, type)} style={{cursor: 'pointer'}}>{type.name}</li>
               ))
             }
           </ul>
         </div>
-        <div className='content-type-builder'>
+        <div className='content-type-builder' onClick={() => onClickCollection(false)}>
           <h3>CONTENT TYPE BUILDER</h3>
         </div>
       </div>
       <div className="container-right">
-        <ContentType types={types} onSave={onSave} onChange={onChange} clickHandler={clickHandler} selectedType={selectedType} setShow={setShow} show={show}/>
+        {
+          !click ? 
+            (<ContentType types={types} onSave={onSave} onChange={onChange} clickHandler={clickHandler} selectedType={selectedType} setShow={setShow} show={show}/>)
+            : 
+            (<EntryDetails collection={collection}/>)
+        }
       </div>
     </div>
   );
