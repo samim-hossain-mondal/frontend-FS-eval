@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home should render the Home component 1`] = `
+<div>
+  <div
+    class="HomePage"
+  >
+    <div
+      class="dashboard-page"
+    >
+      <div
+        class="container-left"
+      >
+        <div
+          class="container-left-header"
+        >
+          <h1>
+            CMS+
+          </h1>
+        </div>
+        <div
+          class="container-left-content"
+        >
+          <div
+            class="dashboard-header"
+          >
+            <a>
+              COLLECTION TYPES
+            </a>
+            <img
+              alt="icon"
+              src="icon-search-dark.png"
+            />
+          </div>
+          <ul />
+        </div>
+        <div
+          class="content-type-builder"
+        >
+          <h3>
+            CONTENT TYPE BUILDER
+          </h3>
+        </div>
+      </div>
+      <div
+        class="container-right"
+      >
+        <div
+          class="content-type"
+        >
+          <div
+            class="content-type-header"
+          >
+            <h2>
+              Content Types
+            </h2>
+          </div>
+          <div
+            class="content-type-body"
+          >
+            <div
+              class="content-type-body"
+            >
+              <div
+                class="left"
+              >
+                <div
+                  class="left-header"
+                >
+                  <a>
+                    0
+                     types
+                  </a>
+                  <img
+                    alt="icon"
+                    src="icon-search-dark.png"
+                  />
+                </div>
+                <div
+                  class="add-new-type-btn"
+                >
+                  <button>
+                     + New Type 
+                  </button>
+                </div>
+                <div
+                  class="list-types"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

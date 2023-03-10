@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ModalForm should render the ModalForm component 1`] = `<div />`;
