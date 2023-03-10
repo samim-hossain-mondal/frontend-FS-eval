@@ -6,6 +6,7 @@ import Register from './pages/register/Register';
 import Home from './pages/home/Home';
 import Error from './pages/error/Error';
 import PageNotFound from './pages/pageNotFound/PageNotFound';
+import ProtectedRoute from './utils/ProtectedRoute';
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Auth />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/home" element={<ProtectedRoute> <Home /> </ProtectedRoute>}/>
         <Route path="/error" element={<Error />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>

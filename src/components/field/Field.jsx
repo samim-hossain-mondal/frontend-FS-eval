@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Modal from '../modal/Modal';
 import proptypes from 'prop-types';
 import axios from 'axios';
+import editimg from '../../assets/user-edit-text-message-note.png';
 import EditDelete from '../editDelete/EditDelete';
 import { API_URL } from '../../constants/url';  
 
@@ -38,6 +39,7 @@ export default function Field({ type }) {
     });
     setShow(false);
     setField(input);
+    window.location.reload();
   };
   const onDelete = async (fieldname) => {
     await axios.delete(`${API_URL}/contents/${type.name}/${fieldname}`, {
@@ -62,7 +64,10 @@ export default function Field({ type }) {
   return (
     <div className="right">
       <div className='right-header'>
-        <a1>{type.name}</a1>
+        <div className='right-header-1'>
+          <a1>{type.name}</a1>
+          <img src={editimg} alt="edit" />
+        </div>
         <a2>
           {currentFields.length} {currentFields.length > 1 ? 'fields' : 'field'}
         </a2>
@@ -70,12 +75,21 @@ export default function Field({ type }) {
       <div className='right-body'>
         <div className='add-new-type-btn'>
           <button onClick={() => setShow(true)}>Add another field</button>
-          <Modal title="Modal" onClose={() => setShow(false)} show={show}
+          <Modal title="ADD" onClose={() => setShow(false)} show={show}
             onSave={onSave}
           >
-            <div className='create-content'>
-              <label>Add another field</label>
-              <input type="text" onChange={onChange}/>
+            <div className='create-content' style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}>
+              <div style={{padding: '20px', fontSize: '1.2rem'}}>
+                <label>Add Field</label>
+              </div>
+              <div>
+                <input type="text" onChange={onChange} style={{height:'3.5vh', width:'15rem'}} />
+              </div>
             </div>
           </Modal>
         </div>

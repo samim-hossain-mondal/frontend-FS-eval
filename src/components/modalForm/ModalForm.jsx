@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import proptypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
+import './ModalForm.css';
 
 export default function Modal(props){
   const closeOnEscapeKeyDown = e => {
@@ -28,9 +29,6 @@ export default function Modal(props){
             <h4 className="modal-title">{props.title}</h4>
           </div>
           <div className="modal-body">{props.children}</div>
-          <button onClick={props.onClose} className="button">
-              Close
-          </button>
         </div>
       </div>
     </CSSTransition>

@@ -38,7 +38,7 @@
 }
 
 .container-left-content > ul > li {
-  padding: 10px 0;
+  padding: 10px 10px;
   color: rgb(166, 166, 166);
 }
 
@@ -60,4 +60,20 @@
   display: flex;
   width: 75%;
   height: 100%;
+}
+
+.dashboard-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 7%;
+  padding-left: 0.35rem;
+  padding-right: 0.35rem;
+  padding-top: 1.5rem;
+}
+
+.dashboard-header > a {
+  font-size: 1.35rem;
+  font-weight: 700;
 }

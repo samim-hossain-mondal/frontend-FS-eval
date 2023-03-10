@@ -10,7 +10,7 @@ import './EntryDetails.css';
 export default function EntryDetails({collection}) {
   const [show, setShow] = useState(false);
   const [entry, setEntry] = useState([]);
-  const fetchEntry= async () => {
+  const fetchEntry = async () => {
     const response = await axios.get(`${API_URL}/collections/${collection.id}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -46,7 +46,6 @@ export default function EntryDetails({collection}) {
     setShow(false);
     fetchEntry();
   };
-  console.log(entry);
   return (
     <div className="entry">
       <div className="entry-header">
@@ -59,16 +58,17 @@ export default function EntryDetails({collection}) {
           </div>
           <div className="entry-body-header-2">
             <button onClick={() => setShow(true)}>Add a new entry</button>
-            <ModalForm title="My Modal" onClose={() => setShow(false)} show={show}
+            <ModalForm title="Add New Entry" onClose={() => setShow(false)} show={show}
             >
-              <div className='create-content'>
+              <hr />
+              <div>
                 {
-                  <form onSubmit={handleAddNewEntrySubmit}>
+                  <form onSubmit={handleAddNewEntrySubmit} className='create-content'>
                     {
                       collection.field.map((item) => (
-                        <div key={item.id}>
-                          <label>{item}</label>
-                          <input type="text" name={item} />
+                        <div key={item.id} className="fields">
+                          <label style={{fontSize:'1.2rem'}}>{item}</label>
+                          <input type="text" name={item} style={{height:'3.5vh', width:'15rem'}}/>
                         </div>
                       ))
                     }
@@ -114,8 +114,8 @@ export default function EntryDetails({collection}) {
                           ))
                         }
                         <div className='editors'>
-                          <img onClick={() => onDelete(item.id)} src={trashimg} alt="trash" />
                           <img src={editimg} alt="edit" />
+                          <img onClick={() => onDelete(item.id)} src={trashimg} alt="trash" />
                         </div>
                       </div>
                     ))

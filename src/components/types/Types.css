@@ -49,10 +49,11 @@
   flex-direction: column;
 }
 
-.right-header > a1 {
+.right-header-1 > a1 {
   font-size: 1.8rem;
   font-weight: 600;
   padding-bottom: 0.5rem;
+  margin-right: 10px;
 }
 
 .right-header > a2{
@@ -126,4 +127,13 @@
 
 .edit {
   padding-right: 20px;
+}
+
+.left-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 1.5%;
 }

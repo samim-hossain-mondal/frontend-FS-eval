@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import ContentType from '../contentType/ContentType';
 import EntryDetails from '../entryDetails/EntryDetails';
+import iconimg from '../../assets/icon-search-dark.png';
 import './Dashboard.css';
 import axios from 'axios';
 import { API_URL } from '../../constants/url';
@@ -38,7 +39,6 @@ export default function Dashboard() {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       }
     });
-    // set new type to current input
     setNewType({});
     setShow(false);
   };
@@ -53,7 +53,10 @@ export default function Dashboard() {
           <h1>CMS+</h1>
         </div>
         <div className='container-left-content'>
-          <h3>COLLECTION TYPES</h3>
+          <div className='dashboard-header'> 
+            <a>COLLECTION TYPES</a> 
+            <img src={iconimg} alt="icon" />
+          </div>
           <ul>
             {
               types.map(type => (

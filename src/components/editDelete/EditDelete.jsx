@@ -10,11 +10,20 @@ export default function EditDelete({ field, onEdit, onDelete, onChangeEdit}) {
     <div className='option'>
       <div className='edit'>
         <img src={editimg} onClick={() => setShowEdit(true)} />
-        <Modal title="My Modal" onClose={() => setShowEdit(false)} show={showEdit}
+        <Modal title="EDIT" onClose={() => setShowEdit(false)} show={showEdit}
           onSave={() => onEdit(field, setShowEdit)}>
-          <div className='create-content'>
-            <label>Edit field</label>
-            <input type="text" onChange={onChangeEdit}/>
+          <div className='create-content' style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+            <div style={{padding: '20px', fontSize: '1.2rem'}}>
+              <label>Edit field</label>
+            </div>
+            <div>
+              <input type="text" onChange={onChangeEdit} style={{height:'3.5vh', width:'15rem'}} />
+            </div>
           </div>
         </Modal>
       </div>
