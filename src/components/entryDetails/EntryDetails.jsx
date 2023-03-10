@@ -119,7 +119,6 @@ export default function EntryDetails({collection}) {
                       </div>
                     ))
                   }
-                  
                 </div>
               )
           }

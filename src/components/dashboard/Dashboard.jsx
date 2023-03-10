@@ -12,6 +12,7 @@ export default function Dashboard() {
   const [newType, setNewType] = useState({});
   const [click, setClick] = useState(false);
   const [collection, setCollection] = useState({});
+  const [input, setInput] = useState({});
   const fetchTypes = async () => {
     const response = await axios.get(`${API_URL}/contents`, {
       headers: {
@@ -22,24 +23,24 @@ export default function Dashboard() {
   };
   useEffect(() => {
     fetchTypes();
-    console.log('1');
   }, [newType]);
   const clickHandler = (type) => {
     setSelectedType(type);
   };
   const onChange = (e) => {
-    setNewType(e.target.value);
+    setInput(e.target.value);
   };
   const onSave = async() => {
     await axios.post(API_URL + '/contents', {
-      name: newType
+      name: input
     }, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       }
     });
-    setShow(false);
+    // set new type to current input
     setNewType({});
+    setShow(false);
   };
   const onClickCollection = (value, type) => {
     setClick(value);
