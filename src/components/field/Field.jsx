@@ -7,11 +7,12 @@ import { API_URL } from '../../constants/url';
 
 export default function Field({ type }) {
   const [currentFields, setCurrentFields] = useState(type.field);
+  const [input, setInput] = useState('');
   const [field, setField] = useState('');
   const [editField, setEditField] = useState('');
   const [show, setShow] = useState(false);
   const onChange = (e) => {
-    setField(e.target.value);
+    setInput(e.target.value);
   };
   const onChangeEdit = (e) => {
     setEditField(e.target.value);
@@ -29,14 +30,14 @@ export default function Field({ type }) {
   }, [field, type.name]);
   const onSave = async () => {
     await axios.post(`${API_URL}/contents/${type.name}`, {
-      field: field
+      field: input
     }, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       }
     });
     setShow(false);
-    setField('');
+    setField(input);
   };
   const onDelete = async (fieldname) => {
     await axios.delete(`${API_URL}/contents/${type.name}/${fieldname}`, {

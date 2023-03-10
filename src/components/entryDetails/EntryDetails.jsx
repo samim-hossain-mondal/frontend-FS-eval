@@ -46,6 +46,7 @@ export default function EntryDetails({collection}) {
     setShow(false);
     fetchEntry();
   };
+  console.log(entry);
   return (
     <div className="entry">
       <div className="entry-header">
